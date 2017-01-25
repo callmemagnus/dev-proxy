@@ -27,10 +27,10 @@ function processPorts(val, acc) {
 
 program
   .version('1.0.0')
-  .option('-p --proxy [value]', 'Ports to proxy', processPorts, [])
-  .option('-k --key [keyPath]', 'Optional path to key file')
-  .option('-c --cert [certPath]', 'Optional path to cert file')
-  .option('-h --host [hostname]', 'Optional hostname')
+  .option('-p --proxy [value]', 'ports to proxy', processPorts, [])
+  .option('-k --key [keyPath]', 'optional path to key file')
+  .option('-c --cert [certPath]', 'optional path to cert file')
+  .option('-h --host [hostname]', 'optional hostname')
   .parse(process.argv);
 
 var hostname = program.host || 'localhost';
