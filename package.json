@@ -8,7 +8,7 @@
   "description": "Simple SSL HTTP proxy using a self-signed certificate. Intended for local development only.",
   "repository": {
     "type": "git",
-    "url": "http://github.com/nickclaw/ssl-proxy.git"
+    "url": "http://github.com/nickclaw/dev-proxy.git"
   },
   "license": "MIT",
   "bin": {
