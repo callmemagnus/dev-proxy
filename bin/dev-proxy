@@ -5,6 +5,7 @@ var proxy = require("http-proxy");
 var chalk = require("chalk");
 var program = require("commander");
 var path = require("path");
+var assert = require("assert");
 
 function getAbsolutePath(str) {
   return str && !path.isAbsolute(str)
@@ -27,7 +28,7 @@ function processPorts(val, acc) {
 
 program
   .version('1.0.0')
-  .option('-p --proxy [value]', 'ports to proxy', processPorts, [])
+  .option('-p --proxy <source:target>', 'ports to proxy', processPorts, [])
   .option('-k --key [keyPath]', 'optional path to key file')
   .option('-c --cert [certPath]', 'optional path to cert file')
   .option('-h --host [hostname]', 'optional hostname')
@@ -36,11 +37,15 @@ program
 var hostname = program.host || 'localhost';
 var key = getAbsolutePath(program.key) || path.resolve(__dirname, '..', 'resources', 'localhost.key');
 var cert = getAbsolutePath(program.cert) || path.resolve(__dirname, '..', 'resources', 'localhost.cert');
+var proxies = program.proxy;
 
-var proxies = program.proxy || [{
-  source: 8080,
-  target: 8443,
-}];
+try {
+  assert(fs.existsSync(key), 'Could not find key at: ' + key);
+  assert(fs.existsSync(cert), 'Could not find certificate at: ' + cert);
+} catch (e) {
+  console.error(chalk.red(e.message));
+  process.exit(1);
+}
 
 proxies.forEach(function(config) {
   var source = config.source;
