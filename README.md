@@ -4,16 +4,16 @@ dev-proxy
 Simple SSL HTTP proxy using a self-signed certificate. Intended for local development only. Based off of [local-ssl-proxy](https://github.com/cameronhunter/local-ssl-proxy).
 
 ```
-Usage: local-ssl-proxy [options]
+Usage: dev-proxy [options]
 
 Options:
 
-  -h, --help            output usage information
-  -V, --version         output the version number
-  -p --proxy [value]    Ports to proxy
-  -k --key [keyPath]    Optional path to key file
-  -c --cert [certPath]  Optional path to cert file
-  -h --host [hostname]  Optional hostname
+  -h, --help                  output usage information
+  -V, --version               output the version number
+  -p --proxy <source:target>  ports to proxy
+  -k --key [keyPath]          optional path to key file
+  -c --cert [certPath]        optional path to cert file
+  -h --host [hostname]        optional hostname
 ```
 
 Install
