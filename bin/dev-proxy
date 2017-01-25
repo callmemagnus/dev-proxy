@@ -57,8 +57,9 @@ proxies.forEach(function(config) {
       key: fs.readFileSync(key, "utf8"),
       cert: fs.readFileSync(cert, "utf8")
     }
-  }).on("error", function(e) {
-    console.error(chalk.red("Request failed to " + ": " + chalk.bold(e.code)));
+  }).on("error", function(e, req) {
+    var host = 'http://' + hostname + ':' + source + req.url;
+    console.error(chalk.red(chalk.bold(e.code) + " " + host));
   }).listen(target);
 
   console.log(chalk.green("Started: https://" + hostname + ":" + source, "→ http://" + hostname + ":" + target));
