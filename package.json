@@ -15,7 +15,6 @@
     "dev-proxy": "bin/dev-proxy"
   },
   "files": [
-    "resources",
     "bin"
   ],
   "scripts": {

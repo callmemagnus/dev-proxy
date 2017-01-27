@@ -5,6 +5,9 @@ var fs = require("fs");
 var path = require("path");
 
 pem.createCertificate({ selfSigned:true }, function(err, keys){
+  if (!fs.existsSync(path.join(__dirname, '..', 'resources'))) {
+    fs.mkdirSync(path.join(__dirname, '..', 'resources'));
+  }
   fs.writeFileSync(path.join(__dirname, '..', 'resources', 'localhost.key'), keys.serviceKey);
   fs.writeFileSync(path.join(__dirname, '..', 'resources', 'localhost.cert'), keys.certificate);
 });
