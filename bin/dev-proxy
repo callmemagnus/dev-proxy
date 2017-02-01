@@ -62,9 +62,10 @@ proxies.forEach(function(config) {
       key: fs.readFileSync(key, "utf8"),
       cert: fs.readFileSync(cert, "utf8")
     }
-  }).on("error", function(e, req) {
+  }).on("error", function(err, req, res) {
     var host = 'http://' + hostname + ':' + source + req.url;
-    console.error(chalk.red(chalk.bold(e.code) + " " + host));
+    console.error(chalk.red(chalk.bold(err.code) + " " + host));
+    res.destroy();
   }).listen(target);
 
   console.log(chalk.green("Started: https://" + hostname + ":" + source, "→ http://" + hostname + ":" + target));
