@@ -30,9 +30,9 @@ To start a proxying from port `9000` to `9001` run:
 dev-proxy --proxy 9000:9001
 ```
 
+Start your web server on the source port (`9000` in the example) and navigate to `https://localhost:<target-port>` ([https://localhost:9001](https://localhost:9001) in the example). You'll get a warning because the certificate is self-signed, this is safe to ignore during development.
+
 To create multiple proxies run:
 ```sh
 dev-proxy --proxy 8080:8443 --proxy 9080:9443
 ```
-
-Start your web server on the source port (`9000` in the example) and navigate to `https://localhost:<target-port>` ([https://localhost:9001](https://localhost:9001) in the example). You'll get a warning because the certificate is self-signed, this is safe to ignore during development.
