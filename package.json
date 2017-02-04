@@ -6,6 +6,14 @@
     "Nicholas Clawson <nickclaw@gmail.com>"
   ],
   "description": "Simple SSL HTTP proxy using a self-signed certificate. Intended for local development only.",
+  "keywords": [
+    "local",
+    "proxy",
+    "ssl",
+    "https",
+    "development",
+    "tool"
+  ],
   "repository": {
     "type": "git",
     "url": "http://github.com/nickclaw/dev-proxy.git"
