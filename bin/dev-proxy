@@ -76,8 +76,8 @@ proxies.forEach(function(config) {
 
   console.log(
     chalk.green(
-      "Started: http://" + hostname + ":" + source,
-      "→ https://" + hostname + ":" + target
+      "Started: https://" + hostname + ":" + target,
+      "→ http://" + hostname + ":" + source
     )
   );
 });

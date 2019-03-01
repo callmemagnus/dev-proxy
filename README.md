@@ -9,12 +9,12 @@ Usage: dev-proxy [options]
 
 Options:
 
-  -h, --help                  output usage information
-  -V, --version               output the version number
-  -p --proxy <source:target>  ports to proxy
-  -k --key [keyPath]          optional path to key file
-  -c --cert [certPath]        optional path to cert file
-  -h --host [hostname]        optional hostname
+  -h, --help                            output usage information
+  -V, --version                         output the version number
+  -p --proxy <source port:target port>  ports to proxy
+  -k --key [keyPath]                    optional path to key file
+  -c --cert [certPath]                  optional path to cert file
+  -h --host [hostname]                  optional hostname
 ```
 
 ## Install
