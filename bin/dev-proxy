@@ -6,42 +6,45 @@ var chalk = require("chalk");
 var program = require("commander");
 var path = require("path");
 var assert = require("assert");
+var pkg = require(path.resolve(__dirname, "..", "package.json"));
 
 function getAbsolutePath(str) {
-  return str && !path.isAbsolute(str)
-    ? path.resolve(process.cwd(), str)
-    : str;
+  return str && !path.isAbsolute(str) ? path.resolve(process.cwd(), str) : str;
 }
 
 function processPorts(val, acc) {
-  var ports = val.split(':');
+  var ports = val.split(":");
   var source = ports[0];
   var target = ports[1] || 443;
 
   acc.push({
     source: source,
-    target: target,
+    target: target
   });
 
   return acc;
 }
 
 program
-  .version('1.0.0')
-  .option('-p --proxy <source:target>', 'ports to proxy', processPorts, [])
-  .option('-k --key [keyPath]', 'optional path to key file')
-  .option('-c --cert [certPath]', 'optional path to cert file')
-  .option('-h --host [hostname]', 'optional hostname')
+  .version(pkg.version)
+  .option("-p --proxy <source:target>", "ports to proxy", processPorts, [])
+  .option("-k --key [keyPath]", "optional path to key file")
+  .option("-c --cert [certPath]", "optional path to cert file")
+  .option("-h --host [hostname]", "optional hostname")
   .parse(process.argv);
 
-var hostname = program.host || 'localhost';
-var key = getAbsolutePath(program.key) || path.resolve(__dirname, '..', 'resources', 'localhost.key');
-var cert = getAbsolutePath(program.cert) || path.resolve(__dirname, '..', 'resources', 'localhost.cert');
+var hostname = program.host || "localhost";
+var key =
+  getAbsolutePath(program.key) ||
+  path.resolve(__dirname, "..", "resources", "localhost.key");
+var cert =
+  getAbsolutePath(program.cert) ||
+  path.resolve(__dirname, "..", "resources", "localhost.cert");
 var proxies = program.proxy;
 
 try {
-  assert(fs.existsSync(key), 'Could not find key at: ' + key);
-  assert(fs.existsSync(cert), 'Could not find certificate at: ' + cert);
+  assert(fs.existsSync(key), "Could not find key at: " + key);
+  assert(fs.existsSync(cert), "Could not find certificate at: " + cert);
 } catch (e) {
   console.error(chalk.red(e.message));
   process.exit(1);
@@ -51,22 +54,30 @@ proxies.forEach(function(config) {
   var source = config.source;
   var target = config.target;
 
-  proxy.createServer({
-    xfwd: true,
-    ws: true,
-    target: {
-      host: hostname,
-      port: source
-    },
-    ssl: {
-      key: fs.readFileSync(key, "utf8"),
-      cert: fs.readFileSync(cert, "utf8")
-    }
-  }).on("error", function(err, req, res) {
-    var host = 'http://' + hostname + ':' + source + req.url;
-    console.error(chalk.red(chalk.bold(err.code) + " " + host));
-    res.destroy();
-  }).listen(target);
+  proxy
+    .createServer({
+      xfwd: true,
+      ws: true,
+      target: {
+        host: hostname,
+        port: source
+      },
+      ssl: {
+        key: fs.readFileSync(key, "utf8"),
+        cert: fs.readFileSync(cert, "utf8")
+      }
+    })
+    .on("error", function(err, req, res) {
+      var host = "http://" + hostname + ":" + source + req.url;
+      console.error(chalk.red(chalk.bold(err.code) + " " + host));
+      res.destroy();
+    })
+    .listen(target);
 
-  console.log(chalk.green("Started: http://" + hostname + ":" + source, "→ https://" + hostname + ":" + target));
+  console.log(
+    chalk.green(
+      "Started: http://" + hostname + ":" + source,
+      "→ https://" + hostname + ":" + target
+    )
+  );
 });
