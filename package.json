@@ -1,7 +1,8 @@
 {
-  "name": "dev-proxy",
-  "version": "2.1.2",
+  "name": "@magnus/dev-proxy",
+  "version": "2.1.3",
   "author": [
+    "magnus anderssen <magnus+npm@anderssen.ch>",
     "Cameron Hunter <hello@cameronhunter.co.uk>",
     "Nicholas Clawson <nickclaw@gmail.com>"
   ],
@@ -16,7 +17,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "http://github.com/nickclaw/dev-proxy.git"
+    "url": "https://github.com/callmemagnus/dev-proxy"
   },
   "license": "MIT",
   "bin": {
@@ -29,10 +30,9 @@
     "install": "node bin/create-keys"
   },
   "dependencies": {
-    "chalk": "^1.1.3",
-    "commander": "^2.9.0",
-    "http-proxy": "^1.15.1",
-    "pem": "^1.9.4"
-  },
-  "devDependencies": {}
+    "chalk": "1.1.3",
+    "commander": "2.9.0",
+    "http-proxy": "1.15.1",
+    "pem": "1.9.4"
+  }
 }

@@ -1,5 +1,6 @@
-dev-proxy
-===============
+# @magnus/dev-proxy
+
+This is sadly just a forked module of dev-proxy. It fixes [the install on windows](https://github.com/azuqua/dev-proxy/issues/1) on parent proxy.
 
 Simple SSL HTTP proxy using a self-signed certificate. Intended for local development only. Based off of [local-ssl-proxy](https://github.com/cameronhunter/local-ssl-proxy).
 
@@ -16,16 +17,17 @@ Options:
   -h --host [hostname]        optional hostname
 ```
 
-Install
--------
+## Install
+
 ```sh
-npm install -g dev-proxy
+npm install -g @magnus/dev-proxy
 # will automatically generate a self-signed cert/key
 ```
 
-Run
----
+## Run
+
 To start a proxying from port `9000` to `9001` run:
+
 ```sh
 dev-proxy --proxy 9000:9001
 ```
@@ -33,6 +35,7 @@ dev-proxy --proxy 9000:9001
 Start your web server on the source port (`9000` in the example) and navigate to `https://localhost:<target-port>` ([https://localhost:9001](https://localhost:9001) in the example). You'll get a warning because the certificate is self-signed, this is safe to ignore during development.
 
 To create multiple proxies run:
+
 ```sh
 dev-proxy --proxy 8080:8443 --proxy 9080:9443
 ```
