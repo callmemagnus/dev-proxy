@@ -32,7 +32,7 @@
   "dependencies": {
     "chalk": "2.4.2",
     "commander": "2.19.0",
-    "http-proxy": "1.17.0",
+    "http-proxy": "1.18.1",
     "pem": "1.14.2"
   }
 }
